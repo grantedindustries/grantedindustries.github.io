@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Granted Industries — Mobile applications</title>
-  <meta name="description" content="Granted Industries is a software-focused company that builds mobile applications.">
+  <meta name="description" content="Granted Industries is a software-focused company building organizational mobile apps that make everyday life easier.">
   <meta name="theme-color" content="#0a0908">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0908'/%3E%3Crect x='3' y='3' width='58' height='58' rx='11' fill='none' stroke='%23d4af6a' stroke-width='2'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' text-anchor='middle' fill='%23e9d3a0'%3EG%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -260,7 +260,7 @@
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
-      padding-bottom: 56px;
+      padding-bottom: 16px;
     }
     .card {
       padding: 26px 24px 28px;
@@ -286,6 +286,42 @@
       line-height: 1.15;
     }
     .card p { margin-top: 8px; color: var(--muted); font-size: 0.94rem; }
+
+    /* Contact */
+    .contact { padding-bottom: 64px; }
+    .contact-panel {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px 32px;
+      padding: 30px 32px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(100deg, rgba(212, 175, 106, 0.09), rgba(244, 239, 230, 0.02) 60%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .contact h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 2rem;
+      line-height: 1.1;
+    }
+    .contact p { margin-top: 6px; color: var(--muted); font-size: 0.94rem; }
+    .mail {
+      padding: 12px 22px;
+      border: 1px solid rgba(212, 175, 106, 0.6);
+      border-radius: 999px;
+      background: rgba(212, 175, 106, 0.08);
+      color: var(--gold-light);
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: none;
+      overflow-wrap: anywhere;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .mail:hover, .mail:focus-visible { background: rgba(212, 175, 106, 0.18); border-color: var(--gold); }
 
     footer {
       border-top: 1px solid var(--line);
@@ -314,6 +350,8 @@
     @media (max-width: 860px) {
       .hero { grid-template-columns: 1fr; gap: 56px; padding-top: 48px; }
       .cards { grid-template-columns: 1fr; }
+      .contact-panel { padding: 26px 24px; }
+      .mail { padding: 11px 16px; font-size: 0.9rem; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation: none !important; transition: none !important; }
@@ -340,7 +378,7 @@
       <div>
         <p class="status rise" style="--i:1"><span class="pulse" aria-hidden="true"></span>Site under construction &mdash; more to come</p>
         <h1 class="rise" style="--i:2">We build <em>mobile applications.</em></h1>
-        <p class="lead rise" style="--i:3"><strong>Granted Industries is a software-focused company.</strong> We design, build, and ship mobile applications &mdash; and we're just getting started.</p>
+        <p class="lead rise" style="--i:3"><strong>Granted Industries is a software-focused company.</strong> We design and build mobile apps that help people stay on top of everyday life.</p>
       </div>
       <div class="device rise" style="--i:4" aria-hidden="true">
         <div class="phone">
@@ -359,18 +397,28 @@
       <article class="card rise" style="--i:5">
         <span class="card-num">01</span>
         <h2>Software focused</h2>
-        <p>Software is what we do. It's the whole company, not a side project.</p>
+        <p>Software is the entire business. We'd rather do one thing properly than a dozen things halfway.</p>
       </article>
       <article class="card rise" style="--i:6">
         <span class="card-num">02</span>
-        <h2>Mobile applications</h2>
-        <p>We build apps for the devices people carry with them everywhere.</p>
+        <h2>Built for mobile</h2>
+        <p>We make apps for the device that's already in your pocket: quick to open and easy to pick up.</p>
       </article>
       <article class="card rise" style="--i:7">
         <span class="card-num">03</span>
-        <h2>More to come</h2>
-        <p>This site is under construction. Check back soon for what's next.</p>
+        <h2>What's coming</h2>
+        <p>We're building organizational apps that make everyday life easier, with less to juggle and less to remember. Details soon.</p>
       </article>
+    </section>
+
+    <section class="wrap contact rise" style="--i:8" id="contact">
+      <div class="contact-panel">
+        <div>
+          <h2>Get in touch</h2>
+          <p>Questions or feedback? We'd like to hear from you.</p>
+        </div>
+        <a class="mail" href="mailto:support@grantedindustries.com">support@grantedindustries.com</a>
+      </div>
     </section>
   </main>
 
