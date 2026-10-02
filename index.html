@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Granted Industries — Mobile applications</title>
+  <meta name="description" content="Granted Industries is a software-focused company that builds mobile applications.">
+  <meta name="theme-color" content="#0a0908">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230a0908'/%3E%3Crect x='3' y='3' width='58' height='58' rx='11' fill='none' stroke='%23d4af6a' stroke-width='2'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='38' text-anchor='middle' fill='%23e9d3a0'%3EG%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0a0908;
+      --text: #f4efe6;
+      --muted: #a39c8f;
+      --faint: #6f695f;
+      --gold: #d4af6a;
+      --gold-light: #f6e7c1;
+      --line: rgba(244, 239, 230, 0.1);
+      --card: rgba(244, 239, 230, 0.035);
+      --serif: "Instrument Serif", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+      --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* Backdrop */
+    .backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(110px);
+      will-change: transform;
+    }
+    .glow-a {
+      width: 620px; height: 620px;
+      top: -220px; right: -140px;
+      background: rgba(212, 175, 106, 0.28);
+      animation: drift-a 22s ease-in-out infinite alternate;
+    }
+    .glow-b {
+      width: 560px; height: 560px;
+      bottom: -260px; left: -180px;
+      background: rgba(74, 58, 150, 0.34);
+      animation: drift-b 26s ease-in-out infinite alternate;
+    }
+    .glow-c {
+      width: 380px; height: 380px;
+      top: 42%; left: 46%;
+      background: rgba(150, 70, 90, 0.16);
+      animation: drift-a 30s ease-in-out infinite alternate-reverse;
+    }
+    .grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.07;
+      mix-blend-mode: overlay;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+    @keyframes drift-a { to { transform: translate(-70px, 60px) scale(1.12); } }
+    @keyframes drift-b { to { transform: translate(90px, -50px) scale(1.08); } }
+
+    /* Layout */
+    .wrap {
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+    header.wrap { padding-top: 28px; }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .mark {
+      display: grid;
+      place-items: center;
+      width: 36px; height: 36px;
+      border: 1px solid rgba(212, 175, 106, 0.6);
+      border-radius: 10px;
+      background: rgba(212, 175, 106, 0.07);
+      color: var(--gold-light);
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      line-height: 1;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    main { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      align-items: center;
+      gap: 48px;
+      padding-top: 64px;
+      padding-bottom: 56px;
+    }
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 7px 14px 7px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: var(--muted);
+      font-size: 0.8rem;
+      letter-spacing: 0.02em;
+    }
+    .pulse {
+      position: relative;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+    .pulse::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: var(--gold);
+      animation: ping 2.2s ease-out infinite;
+    }
+    @keyframes ping { to { transform: scale(3.4); opacity: 0; } }
+
+    h1 {
+      margin-top: 28px;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(3rem, 8.2vw, 6rem);
+      line-height: 0.98;
+      letter-spacing: -0.02em;
+    }
+    h1 em {
+      display: inline-block;
+      padding-right: 0.08em;
+      background: linear-gradient(100deg, var(--gold-light) 0%, var(--gold) 48%, #f1dfb0 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .lead {
+      max-width: 34em;
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 1.6vw, 1.18rem);
+    }
+    .lead strong { color: var(--text); font-weight: 500; }
+
+    /* Phone */
+    .device { display: grid; place-items: center; }
+    .phone {
+      position: relative;
+      width: min(270px, 62vw);
+      aspect-ratio: 9 / 18.6;
+      padding: 10px;
+      border-radius: 48px;
+      background: linear-gradient(150deg, #4a4337 0%, #17140f 38%, #0d0b08 62%, #3a3429 100%);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.07),
+        0 50px 90px -30px rgba(0, 0, 0, 0.9),
+        0 0 140px -30px rgba(212, 175, 106, 0.45);
+      transform: rotate(5deg);
+      animation: float 8s ease-in-out infinite;
+    }
+    @keyframes float {
+      50% { transform: rotate(3.5deg) translateY(-14px); }
+    }
+    .screen {
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 24px;
+      border-radius: 38px;
+      background:
+        radial-gradient(90% 55% at 50% 0%, rgba(212, 175, 106, 0.22), transparent 70%),
+        radial-gradient(80% 50% at 50% 100%, rgba(74, 58, 150, 0.28), transparent 70%),
+        #0c0b09;
+      overflow: hidden;
+      text-align: center;
+    }
+    .island {
+      position: absolute;
+      top: 11px; left: 50%;
+      width: 30%; height: 22px;
+      border-radius: 999px;
+      background: #000;
+      transform: translateX(-50%);
+    }
+    .screen .mark {
+      width: 60px; height: 60px;
+      border-radius: 17px;
+      font-size: 2.5rem;
+      box-shadow: 0 10px 40px -8px rgba(212, 175, 106, 0.55);
+    }
+    .screen-title {
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      line-height: 1.15;
+    }
+    .screen-sub { color: var(--muted); font-size: 0.72rem; letter-spacing: 0.04em; }
+    .bar {
+      position: relative;
+      width: 62%;
+      height: 3px;
+      margin-top: 6px;
+      border-radius: 999px;
+      background: rgba(244, 239, 230, 0.12);
+      overflow: hidden;
+    }
+    .bar::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 45%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      animation: slide 2.4s ease-in-out infinite;
+    }
+    @keyframes slide {
+      from { transform: translateX(-110%); }
+      to { transform: translateX(240%); }
+    }
+
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      padding-bottom: 56px;
+    }
+    .card {
+      padding: 26px 24px 28px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(244, 239, 230, 0.055), rgba(244, 239, 230, 0.015));
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .card:hover { border-color: rgba(212, 175, 106, 0.45); transform: translateY(-3px); }
+    .card-num {
+      color: var(--gold);
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.05rem;
+    }
+    .card h2 {
+      margin-top: 10px;
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.6rem;
+      line-height: 1.15;
+    }
+    .card p { margin-top: 8px; color: var(--muted); font-size: 0.94rem; }
+
+    footer {
+      border-top: 1px solid var(--line);
+      color: var(--faint);
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+    }
+    footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 22px;
+      padding-bottom: 26px;
+    }
+
+    /* Entrance */
+    .rise {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: rise 1s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+      animation-delay: calc(var(--i, 0) * 110ms);
+    }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; gap: 56px; padding-top: 48px; }
+      .cards { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .rise { opacity: 1; transform: none; }
+      .pulse::after { display: none; }
+      .bar::after { transform: translateX(60%); }
+    }
+  </style>
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true">
+    <span class="glow glow-a"></span>
+    <span class="glow glow-b"></span>
+    <span class="glow glow-c"></span>
+    <div class="grain"></div>
+  </div>
+
+  <header class="wrap rise">
+    <div class="brand"><span class="mark" aria-hidden="true">G</span>Granted Industries</div>
+  </header>
+
+  <main>
+    <section class="wrap hero">
+      <div>
+        <p class="status rise" style="--i:1"><span class="pulse" aria-hidden="true"></span>Site under construction &mdash; more to come</p>
+        <h1 class="rise" style="--i:2">We build <em>mobile applications.</em></h1>
+        <p class="lead rise" style="--i:3"><strong>Granted Industries is a software-focused company.</strong> We design, build, and ship mobile applications &mdash; and we're just getting started.</p>
+      </div>
+      <div class="device rise" style="--i:4" aria-hidden="true">
+        <div class="phone">
+          <div class="screen">
+            <span class="island"></span>
+            <span class="mark">G</span>
+            <p class="screen-title">Granted<br>Industries</p>
+            <p class="screen-sub">Something new is in the works</p>
+            <span class="bar"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap cards">
+      <article class="card rise" style="--i:5">
+        <span class="card-num">01</span>
+        <h2>Software focused</h2>
+        <p>Software is what we do. It's the whole company, not a side project.</p>
+      </article>
+      <article class="card rise" style="--i:6">
+        <span class="card-num">02</span>
+        <h2>Mobile applications</h2>
+        <p>We build apps for the devices people carry with them everywhere.</p>
+      </article>
+      <article class="card rise" style="--i:7">
+        <span class="card-num">03</span>
+        <h2>More to come</h2>
+        <p>This site is under construction. Check back soon for what's next.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>&copy; 2026 Granted Industries LLC</span>
+      <span>grantedindustries.com</span>
+    </div>
+  </footer>
+</body>
+</html>
